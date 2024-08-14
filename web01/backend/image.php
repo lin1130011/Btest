@@ -4,7 +4,7 @@
         <table width="100%">
             <tbody>
                 <tr class="yel">
-                    <td width="80%">校園映像資料圖片</td>
+                    <td width="45%">校園映像資料圖片</td>
                     <td width="7%">顯示</td>
                     <td width="7%">刪除</td>
                     <td></td>
@@ -17,13 +17,11 @@
                 ?>
                 <tr class="cent">
                     <td width="45%">
-                        <img src="./images/<?= $value['img'] ?>" alt="" style="width: 300px;height: 30px;">
+                        <img src="./images/<?= $value['img'] ?>" alt="" style="width: 300px;height: 90px;">
                     </td>
-                    <td width="23%">
-                        <input type="text" name="text[]" id="" value="<?= $value['text'] ?>">
-                    </td>
+
                     <td width="7%">
-                        <input type="radio" name="sh" id="" value="<?= $value['id'] ?>" <?= ($value['sh'] == 1) ? 'checked' : '' ?>>
+                        <input type="checkbox" name="sh[]" id="" value="<?= $value['id'] ?>" <?= ($value['sh'] == 1) ? 'checked' : '' ?>>
                     </td>
                     <td width="7%">
                         <input type="checkbox" name="del[]" id="" value="<?= $value['id'] ?>">
