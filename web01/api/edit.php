@@ -11,19 +11,29 @@ foreach ($_POST['id'] as $key => $id) {
     } else {
         $row = $db->find($id);
         switch ($table) {
+            
+            case'admin':
+                $row['acc'] = $_POST['acc'][$key];
+                $row['pwd'] = $_POST['pwd'][$key];
+                break;
+
             case 'title':
                 $row['sh'] = (isset($_POST['sh']) && $_POST['sh'] == $id) ? 1 : 0;
                 $row['text'] = $_POST['text'][$key];
                 break;
 
             case 'ad':
+            case 'news':
                 $row['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
                 $row['text'] = $_POST['text'][$key];
                 break;
+
+
             case 'mvim':
-            case 'image':
+            case 'image':            
                 $row['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
                 break;
+
         }
 
 

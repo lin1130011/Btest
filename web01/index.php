@@ -19,24 +19,61 @@ include_once "./api/base.php";
 	<div id="cover" style="display:none; ">
 		<div id="coverr">
 			<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;"
-				onclick="cl(&#39;#cover&#39;)">X</a>
+				onclick="cl('#cover')">X</a>
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
 		</div>
 	</div>
 	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
-		<a title="" href="./home_files/home.htm">
-			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div><!--標題-->
+		<a title="" href="./index.php">
+			<?php
+			$Title = new DB('title');
+			$title = $Title->find((['sh' => 1]));
+			?>
+			<div class="ti" style="background:url('./images/<?= $title['img'] ?>'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">主選單區</span>
+					<?php
+					$Menu = new DB('menu');
+					$menu = $Menu->all(['sh' => 1, 'main_id' => 0]);
+
+					foreach ($menu as $key => $value) {
+						# code...
+					?>
+						<div class="mainmu">
+							<a style="color:#000; font-size:13px; text-decoration:none;" href="<?= $value['href'] ?>">
+								<?= $value['text'] ?>
+							</a>
+							<?php
+							if ($Menu->count(['main_id' => $value['id']]) > 0) {
+								$sub = $Menu->all(['main_id' => $value['id']]);
+								echo "<div class='mw'>";
+								foreach ($sub as $s) {
+							?>
+									<div class="mainmu2">
+										<a href='<?= $s['href']; ?>'><?= $s['text']; ?></a>
+									</div>
+							<?php
+								}
+								echo "</div>";
+							}
+							?>
+						</div>
+					<?php
+					}
+					?>
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
-						1 </span>
+						<?php
+						$View = new DB('views');
+						$row = $View->find(['id' => '1']);
+						?>
+						<?= $row['view'] ?> </span> </span>
 				</div>
 			</div>
 
@@ -56,7 +93,7 @@ include_once "./api/base.php";
 			</div>
 			<script>
 				$(".sswww").hover(
-					function () {
+					function() {
 						$("#alt").html("" + $(this).children(".all").html() + "").css({
 							"top": $(this).offset().top - 50
 						})
@@ -64,7 +101,7 @@ include_once "./api/base.php";
 					}
 				)
 				$(".sswww").mouseout(
-					function () {
+					function() {
 						$("#alt").hide()
 					}
 				)
@@ -101,7 +138,11 @@ include_once "./api/base.php";
 		<div style="clear:both;"></div>
 		<div
 			style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-			<span class="t" style="line-height:123px;"></span>
+			<?php
+			$Bottom = new DB("bottom");
+			$row = $Bottom->find(1);
+			?>
+			<span class="t" style="line-height:123px;"><?= $row['bottom'] ?></span>
 		</div>
 	</div>
 

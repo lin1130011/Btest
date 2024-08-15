@@ -1,5 +1,8 @@
 <?php
 include_once "./api/base.php";
+if (!isset($_SESSION['login'])) {
+	to('./index.php?do=login');
+}
 ?>
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -19,7 +22,7 @@ include_once "./api/base.php";
 	<div id="cover" style="display:none; ">
 		<div id="coverr">
 			<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;"
-				onclick="cl(&#39;#cover&#39;)">X</a>
+				onclick="cl('#cover')">X</a>
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;">
 
 
@@ -58,7 +61,7 @@ include_once "./api/base.php";
 						<div class="mainmu">
 							校園映象資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=views">
 						<div class="mainmu">
 							進站總人數管理 </div>
 					</a>
@@ -83,7 +86,11 @@ include_once "./api/base.php";
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
-						1 </span>
+						<?php
+						$View = new DB('views');
+						$row = $View->find(['id'=> '1']);
+						?>
+						<?=$row['view']?> </span>
 				</div>
 			</div>
 			<div class="di"
@@ -95,8 +102,9 @@ include_once "./api/base.php";
 							<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;"
 								class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
 							</td>
-							<td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)"
-									style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+							<td>
+								<button onclick="location.href='./api/logout.php'"	style="width:99%; margin-right:2px; height:50px;">管理登出</button>
+								</td>
 						</tr>
 					</tbody>
 				</table>
@@ -118,7 +126,11 @@ include_once "./api/base.php";
 		<div style="clear:both;"></div>
 		<div
 			style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-			<span class="t" style="line-height:123px;"></span>
+			<?php
+			$Bottom = new DB("bottom");
+			$row = $Bottom->find(1);
+			?>
+			<span class="t" style="line-height:123px;"><?=$row['bottom']?></span>
 		</div>
 	</div>
 
