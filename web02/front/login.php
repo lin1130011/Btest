@@ -7,7 +7,7 @@
         </tr>
         <tr>
             <td>密碼</td>
-            <td><input type="password" name="pw" id="pw"></td>
+            <td><input type="password" name="pwd" id="pwd"></td>
         </tr>
         <tr>
             <td>
@@ -21,3 +21,15 @@
         </tr>
     </table>
 </fieldset>
+
+<script>
+    function login() {
+        $.post("../api/chk_acc.php", {
+            acc: $("#acc").val()
+        }, (chk_acc) => {
+            if (parseInt(chk_acc == 1)) {}
+            console.log(chk_acc);
+
+        })
+    }
+</script>
