@@ -53,8 +53,9 @@ class DB
         } else {
             // INSERT INTO `t`(`id`, `img`, `text`, `sh`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')
             $keys = array_keys($arg);
-            $sql = "insert into $this->table (`" . join("`,`", $keys) . "`) values ('" . join("','", $arg) . "')";
+            $sql = "insert into `$this->table` (`" . join("`,`", $keys) . "`) values ('" . join("','", $arg) . "')";
         }
+        // echo $sql;
         return $this->pdo->exec($sql);
     }
 

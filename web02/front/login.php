@@ -24,12 +24,26 @@
 
 <script>
     function login() {
-        $.post("../api/chk_acc.php", {
+        $.post("./api/chk_acc.php", {
             acc: $("#acc").val()
         }, (chk_acc) => {
-            if (parseInt(chk_acc == 1)) {}
             console.log(chk_acc);
 
+            if (parseInt(chk_acc) == 1) {
+                $.post("./api/chk_pwd.php", {
+                    pwd: $("#pwd").val()
+                }, (chk_pwd) => {
+                    console.log(chk_pwd);
+                    if (parseInt(chk_pwd) == 1) {
+                        alert("登入成功")
+                        location.href = './admin.php'
+                    } else {
+                        alert("密碼錯誤")
+                    }
+                })
+            } else {
+                alert("查無帳號")
+            }
         })
     }
 </script>
