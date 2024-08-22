@@ -31,9 +31,10 @@
 
             if (parseInt(chk_acc) == 1) {
                 $.post("./api/chk_pwd.php", {
+                    acc: $("#acc").val(),
                     pwd: $("#pwd").val()
                 }, (chk_pwd) => {
-                    console.log(chk_pwd);
+                    // console.log(chk_pwd);
                     if (parseInt(chk_pwd) == 1) {
                         alert("登入成功")
                         location.href = './admin.php'

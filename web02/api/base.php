@@ -1,4 +1,5 @@
 <?php
+session_start();
 class DB
 {
     public $table;
@@ -105,4 +106,9 @@ function dd($arg)
     echo "<pre>";
     print_r($arg);
     echo "</pre>";
+}
+
+function to($url)
+{
+    header("location:$url");
 }

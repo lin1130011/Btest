@@ -1,4 +1,9 @@
 <?php
 include_once "./base.php";
 $User = new DB('users');
-echo $User->count($_POST);
+$chk = $User->count($_POST);
+// dd($_POST);
+if ($chk) {
+    $_SESSION['user'] = $_POST['acc'];
+    echo $chk;
+}

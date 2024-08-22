@@ -1,5 +1,6 @@
 ﻿<?php
 include_once "./api/base.php";
+dd($_SESSION['user']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
@@ -41,9 +42,14 @@ include_once "./api/base.php";
 					<span style="width:78%; display:inline-block;">
 						<marquee>請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章</marquee>
 					</span>
-					<span style="width:18%; display:inline-block;">
-						<a href="?do=login">會員登入</a>
-					</span>
+					<?php
+					if (isset($_SESSION['user'])) {
+						echo "歡迎，{$_SESSION['user']}";
+						echo "<button onclick='location.href=&#39;./api/logout.php&#39;'>登出</button>";
+					} else {
+						echo "<a href='?do=login'>會員登入</a>";
+					}
+					?>
 					<div class="content">
 						<?php
 						$do = $_GET['do'] ?? 'main';
