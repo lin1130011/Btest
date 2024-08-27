@@ -38,7 +38,6 @@ a:hover {
 
 #mm {
 	min-height: 520px;
-	/* height: 520px; */
 }
 
 #all {
@@ -91,7 +90,7 @@ a:hover {
 
 #bottom {
 	text-align: right;
-	padding: 3px
+	padding: 3px 12px;
 }
 
 a.button {
@@ -289,14 +288,7 @@ input[type=radio] {
 	cursor: default;
 }
 
-.good {
-	width: 25px;
-	height: 25px;
-	background: url(../icon/02B03.jpg);
-	background-size: cover;
-	display: inline-block;
-	background-position: 0px 2px;
-}
+
 
 #alerr h3 {
 	color: #0CF;
