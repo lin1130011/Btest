@@ -91,20 +91,22 @@
 
         function del() {
             let chks = $("input[type='checkbox']:checked")
-            let ids = new Array();
+            let ids = new Array()
             if (chks.length > 0) {
                 for (let i = 0; i < chks.length; i++) {
                     ids.push(chks[i].value)
                 }
                 $.post("./api/del_user.php", {
                     ids
-                }, () => {
-                    //ids.forEach(id => $(`input[value='${id}']`).parents('tr').remove())
+                }, (res) => {
+                    // console.log(res);
+
                     location.reload();
                 })
             } else {
-                alert("沒有帳號要刪除")
+                alert("沒有東西要刪除")
             }
+
         }
     </script>
 </fieldset>

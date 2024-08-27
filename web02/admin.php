@@ -1,6 +1,5 @@
 ﻿<?php
 include_once "./api/base.php";
-dd($_SESSION['user']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
@@ -45,11 +44,12 @@ dd($_SESSION['user']);
 					<?php
 					if (isset($_SESSION['user'])) {
 						echo "歡迎，{$_SESSION['user']}";
-						echo "<button onclick='location.href=&#39;./api/logout.php&#39;'>登出</button>";
+						echo "<button onclick=\"location.href='./api/logout.php'\">登出</button>";
 					} else {
 						echo "<a href='?do=login'>會員登入</a>";
 					}
 					?>
+
 					<div class="content">
 						<?php
 						$do = $_GET['do'] ?? 'main';

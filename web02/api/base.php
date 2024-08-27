@@ -22,7 +22,7 @@ class DB
                 $tmp = $this->a2s($arg[0]);
                 $sql .= " where " . join(" && ", $tmp);
             } else {
-                $sql .= " where " . $arg[0];
+                $sql .= $arg[0];
             }
         }
         if (isset($arg[1])) {
@@ -62,13 +62,14 @@ class DB
 
     function del($arg)
     {
-        $sql = "delete form $this->table where ";
+        $sql = "delete from $this->table where ";
         if (is_array($arg)) {
             $tmp = $this->a2s($arg);
             $sql .= join(" && ", $tmp);
         } else {
-            $sql .= " `id` = '{$arg['id']}'";
+            $sql .= " `id` = '$arg'";
         }
+        // echo $sql;
         return $this->pdo->exec($sql);
     }
 
