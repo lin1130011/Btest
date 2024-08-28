@@ -1,3 +1,7 @@
-<?php include_once "base.php";
+<?php
+include_once "./base.php";
+
+
 unset($_SESSION['user']);
+
 to("../index.php");

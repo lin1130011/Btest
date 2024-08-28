@@ -1,10 +1,9 @@
 <?php
 include_once "./base.php";
-$User = new DB('users');
-$result = $User->find(['email' => $_GET['email']]);
-
+$result = $Users->find(['email' => $_POST['email']]);
+// dd($_POST);
 if (!empty($result)) {
-    echo "您的密碼為: {$result['pwd']}";
+    echo "您的密碼為" . $result['pwd'];
 } else {
     echo "查無資料";
 }
