@@ -1,24 +1,28 @@
 <?php
+
+session_start();
+
 class DB
 {
     public $table;
     public $dsn = "mysql:host=localhost;dbname=db1;charset=utf8";
     public $pdo;
 
+
     function __construct($table)
     {
         $this->table = $table;
-
         $this->pdo = new PDO($this->dsn, 'root', '');
     }
 
     function all(...$arg)
     {
-        $sql = "SELECT * from $this->table";
+        $sql = "select * from $this->table";
+
         if (isset($arg[0])) {
             if (is_array($arg[0])) {
                 $tmp = $this->a2s($arg[0]);
-                $sql .= " WHERE " . join(" && ", $tmp);
+                $sql .= " where " . join(" && ", $tmp);
             } else {
                 $sql .= $arg[0];
             }
@@ -27,51 +31,52 @@ class DB
         if (isset($arg[1])) {
             $sql .= $arg[1];
         }
-        // echo $sql;
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function find($arg)
     {
-        $sql = "SELECT * from $this->table";
+        $sql = "select * from $this->table";
 
         if (is_array($arg)) {
             $tmp = $this->a2s($arg);
-            $sql .= " WHERE " . join(",", $tmp);
+            $sql .= " where " . join(" && ", $tmp);
         } else {
-            $sql .= " WHERE `id` = $arg";
+            $sql .= " where `id` = $arg";
         }
-
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
     function save($arg)
     {
         if (isset($arg['id'])) {
+            // UPDATE `movies` SET `id`='[value-1]',`name`='[value-2]',`level`='[value-3]',`length`='[value-4]',`ondate`='[value-5]',`publish`='[value-6]',`director`='[value-7]',`trailer`='[value-8]',`poster`='[value-9]',`intro`='[value-10]',`sh`='[value-11]',`rank`='[value-12]' WHERE 1
             $tmp = $this->a2s($arg);
-            $sql = "UPDATE `$this->table` SET " . join(",", $tmp) . " WHERE `id` = '{$arg['id']}'";
+            $sql = "update $this->table set " . join(",", $tmp);
+            $sql .= " where `id` = {$arg['id']}";
         } else {
-            // $sql= "INSERT INTO `$this->table`(`id`, `name`, `mobile`, `age`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')"
             $key = array_keys($arg);
-            $sql = "INSERT INTO `$this->table` (`" . join("`,`", $key) . "`) VALUES ('" . join("','", $arg) . "')";
+            $sql = "insert into $this->table (`" . join("`,`", $key) . "`) values ('" . join("','", $arg) . "')";
         }
-        return $this->pdo->query($sql);
+        return $this->pdo->exec($sql);
     }
 
     function del($arg)
     {
+        $sql = "delete from $this->table where ";
         if (is_array($arg)) {
             $tmp = $this->a2s($arg);
-            $sql = "DELETE from $this->table where " . join(" && ", $tmp);
+            $sql .= join(" && ", $tmp);
         } else {
-            $sql = "DELETE from $this->table where `id` = $arg";
+            $sql .= " `id` = {$arg}";
         }
-        return $this->pdo->query($sql);
+        return $this->pdo->exec($sql);
     }
 
     function count(...$arg)
     {
         $sql = "select count(*) from $this->table";
+
         if (isset($arg[0])) {
             if (is_array($arg[0])) {
                 $tmp = $this->a2s($arg[0]);
@@ -83,13 +88,14 @@ class DB
         if (isset($arg[1])) {
             $sql .= $arg[1];
         }
-        // echo $sql;
+
         return $this->pdo->query($sql)->fetchColumn();
     }
-    function a2s($array)
+
+    function a2s($arg)
     {
         $tmp = [];
-        foreach ($array as $key => $value) {
+        foreach ($arg as $key => $value) {
             $tmp[] = "`{$key}` = '{$value}'";
         }
         return $tmp;
@@ -100,9 +106,15 @@ function to($url)
 {
     header("location:$url");
 }
-function dd($array)
+
+function dd($arg)
 {
     echo "<pre>";
-    print_r($array);
+    print_r($arg);
     echo "</pre>";
 }
+
+
+$Users = new DB('users');
+
+$News = new DB('news');
