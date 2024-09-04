@@ -1,24 +1,24 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-    <p class="t cent botli">管理者帳號管理</p>
+    <p class="t cent botli">動態文字廣告管理</p>
     <form method="post" action="./api/edit.php">
         <table width="100%">
             <tbody>
                 <tr class="yel">
-                    <td width="45%">帳號</td>
-                    <td width="45%">密碼</td>
+                    <td width="80%">動態文字廣告</td>
+                    <td width="10%">顯示</td>
                     <td width="10%">刪除</td>
+
                 </tr>
                 <?php
-                $Admin = new DB($do);
-                $users = $Admin->all();
-
-                foreach ($users as $key => $value) : ?>
+                $Ad = new DB($do);
+                $data = $Ad->all();
+                foreach ($data as $key => $value) : ?>
                     <tr class="cent">
                         <td>
-                            <input type="text" name="acc[]" value="<?= $value['acc'] ?>">
+                            <input type="text" name="text[]" id="" value="<?= $value['text'] ?>" style="width:80%;">
                         </td>
                         <td>
-                            <input type="password" name="pwd[]" value="<?= $value['pwd'] ?>">
+                            <input type="checkbox" name="sh[]" id="" value="<?= $value['id'] ?>" <?= ($value['sh'] == 1) ? "checked" : "" ?>>
                         </td>
                         <td>
                             <input type="checkbox" name="del[]" id="" value="<?= $value['id'] ?>">
@@ -32,7 +32,7 @@
             <tbody>
                 <tr>
                     <td width="200px">
-                        <input type="button" onclick="op('#cover','#cvr','./modals/<?= $do ?>.php')" value="新增管理者帳號">
+                        <input type="button" onclick="op('#cover','#cvr','./modals/<?= $do ?>.php')" value="新增動態文字廣告">
                     </td>
                     <td class="cent"> <input type="hidden" name="table" value="<?= $do; ?>"><input type="submit" value="修改確定"><input type="reset" value="重置">
                     </td>

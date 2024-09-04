@@ -1,5 +1,8 @@
 ﻿<?php
 include "./api/base.php";
+if (empty($_SESSION['login'])) {
+	to("./index.php?do=login");
+}
 ?>
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -24,8 +27,12 @@ include "./api/base.php";
 	</div>
 	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
-		<a title="" href="?">
-			<div class="ti" style="background:url('use/'); background-size:cover;"></div><!--標題-->
+		<?php
+		$Title = new DB('title');
+		$tt = $Title->find(['sh' => 1]);
+		?>
+		<a title="" href="./index.php">
+			<div class="ti" style="background:url('./images/<?= $tt['img'] ?>'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
@@ -73,7 +80,11 @@ include "./api/base.php";
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
-						1 </span>
+						<?php
+						$views = $Total->find(1)['views'];
+						echo $views;
+						?>
+					</span>
 				</div>
 			</div>
 			<div class="di"
@@ -85,8 +96,9 @@ include "./api/base.php";
 							<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;"
 								class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
 							</td>
-							<td><button onclick="document.cookie='user=';location.replace('?')"
-									style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+							<td>
+								<button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -105,7 +117,10 @@ include "./api/base.php";
 		<div style="clear:both;"></div>
 		<div
 			style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-			<span class="t" style="line-height:123px;"></span>
+			<span class="t" style="line-height:123px;">
+				<?php $Bottom = new DB('bottom') ?>
+				<?= $Bottom->find(1)['text'] ?>
+			</span>
 		</div>
 	</div>
 

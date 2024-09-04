@@ -114,7 +114,12 @@ function dd($arg)
     echo "</pre>";
 }
 
+$Admin = new DB('admin');
+$Total = new DB('total');
 
-$Users = new DB('users');
-
-$News = new DB('news');
+if (!isset($_SESSION['views'])) {
+    $total = $Total->find(1);
+    $total['views']++;
+    $Total->save($total);
+    $_SESSION['views'] = $total['views'];
+}

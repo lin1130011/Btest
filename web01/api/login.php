@@ -1,4 +1,7 @@
 <?php
 include_once "./base.php";
 
-echo $Users->count($_POST);
+if ($Admin->count($_POST)) {
+    $_SESSION['login'] = $_POST['acc'];
+    echo $Admin->count($_POST);
+}
