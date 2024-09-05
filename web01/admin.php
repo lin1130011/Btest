@@ -1,7 +1,8 @@
 ﻿<?php
-include "./api/base.php";
+include_once "./api/base.php";
 if (empty($_SESSION['login'])) {
-	to("./index.php?do=login");
+	to("./index.php");
+	exit;
 }
 ?>
 <!DOCTYPE html
@@ -13,9 +14,9 @@ if (empty($_SESSION['login'])) {
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<title>卓越科技大學校園資訊系統</title>
-	<link href="./Management page_files/css.css" rel="stylesheet" type="text/css">
-	<script src="./Management page_files/jquery-1.9.1.min.js"></script>
-	<script src="./Management page_files/js.js"></script>
+	<link href="./css/css.css" rel="stylesheet" type="text/css">
+	<script src="./js/jquery-1.9.1.min.js"></script>
+	<script src="./js/js.js"></script>
 </head>
 
 <body>
@@ -25,21 +26,18 @@ if (empty($_SESSION['login'])) {
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
 		</div>
 	</div>
-	<iframe style="display:none;" name="back" id="back"></iframe>
+
 	<div id="main">
-		<?php
-		$Title = new DB('title');
-		$tt = $Title->find(['sh' => 1]);
-		?>
-		<a title="" href="./index.php">
-			<div class="ti" style="background:url('./images/<?= $tt['img'] ?>'); background-size:cover;"></div><!--標題-->
+		<a title="" href="?">
+			<div class="ti" style="background:url('use/'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">後台管理選單</span>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=title">
+					<a style="color:#000; font-size:13px; text-decoration:none;"
+						href="?do=title">
 						<div class="mainmu">
 							網站標題管理 </div>
 					</a>
@@ -80,11 +78,7 @@ if (empty($_SESSION['login'])) {
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
-						<?php
-						$views = $Total->find(1)['views'];
-						echo $views;
-						?>
-					</span>
+						<?= $Total->find(1)['views'] ?> </span>
 				</div>
 			</div>
 			<div class="di"
@@ -97,7 +91,9 @@ if (empty($_SESSION['login'])) {
 								class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
 							</td>
 							<td>
-								<button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button>
+								<button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">
+									管理登出
+								</button>
 							</td>
 						</tr>
 					</tbody>
@@ -113,16 +109,14 @@ if (empty($_SESSION['login'])) {
 				?>
 			</div>
 
+			<div style="clear:both;"></div>
+			<div
+				style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
+				<span class="t" style="line-height:123px;">
+					<?= $Bottom->find(1)['text'] ?>
+				</span>
+			</div>
 		</div>
-		<div style="clear:both;"></div>
-		<div
-			style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-			<span class="t" style="line-height:123px;">
-				<?php $Bottom = new DB('bottom') ?>
-				<?= $Bottom->find(1)['text'] ?>
-			</span>
-		</div>
-	</div>
 
 </body>
 

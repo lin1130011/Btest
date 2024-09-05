@@ -6,13 +6,6 @@
     <!--正中央-->
     <script>
         var lin = new Array();
-        <?php
-        $Mvim = new DB('mvim');
-        $mv = $Mvim->all(['sh' => 1]);
-        foreach ($mv as $m) {
-            echo "lin.push('images/{$m['img']}');";
-        }
-        ?>
         var now = 0;
         if (lin.length > 1) {
             setInterval("ww()", 3000);
