@@ -10,13 +10,12 @@
         </tr>
         <tr>
             <td>
-                <input type="hidden" name="table" value="ad">
+                <input type="hidden" name="table" value="news">
             </td>
             <td>
                 <input type="submit" value="新增">
                 <input type="reset" value="重置">
             </td>
-
         </tr>
     </table>
 </form>

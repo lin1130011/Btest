@@ -1,9 +1,5 @@
 ﻿<?php
 include_once "./api/base.php";
-if (empty($_SESSION['login'])) {
-	to("./index.php");
-	exit;
-}
 ?>
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -26,23 +22,17 @@ if (empty($_SESSION['login'])) {
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
 		</div>
 	</div>
-
+	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
-		<?php
-		$row = $Title->find(['sh' => 1]);
-		?>
-		<a title="<?= $row['text'] ?>" href="./index.php">
-			<div class="ti" style="background:url('./images/<?= $row['img'] ?>'); background-size:cover;">
-
-			</div><!--標題-->
+		<a title="" href="./index.php">
+			<div class="ti" style="background:url('./images/<?= $Title->find(['sh' => 1])['img'] ?>'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">後台管理選單</span>
-					<a style="color:#000; font-size:13px; text-decoration:none;"
-						href="?do=title">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=title">
 						<div class="mainmu">
 							網站標題管理 </div>
 					</a>
@@ -95,11 +85,8 @@ if (empty($_SESSION['login'])) {
 							<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;"
 								class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
 							</td>
-							<td>
-								<button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">
-									管理登出
-								</button>
-							</td>
+							<td><button onclick="document.cookie='user=';location.replace('?')"
+									style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -112,8 +99,8 @@ if (empty($_SESSION['login'])) {
 					include "./backend/title.php";
 				}
 				?>
-			</div>
 
+			</div>
 			<div style="clear:both;"></div>
 			<div
 				style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">

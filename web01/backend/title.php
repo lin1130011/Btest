@@ -14,11 +14,10 @@
                 $db = ${ucfirst($do)};
                 $data = $db->all();
 
-
                 foreach ($data as $key => $value) : ?>
-                    <tr>
+                    <tr class="cent">
                         <td>
-                            <img style="width: 300px;height:30px" src="./images/<?= $value['img'] ?>" alt="<?= $value['text'] ?>">
+                            <img src="./images/<?= $value['img'] ?>" alt="<?= $value['text'] ?>" style="width: 300px; height:30px">
                         </td>
                         <td>
                             <input type="text" name="text[]" id="" value="<?= $value['text'] ?>">
@@ -28,21 +27,22 @@
                         </td>
                         <td>
                             <input type="checkbox" name="del[]" id="" value="<?= $value['id'] ?>">
-                            <input type="hidden" name="id[]" id="" value="<?= $value['id'] ?>">
-                            <input type="hidden" name="table" id="" value="<?= $do ?>">
                         </td>
                         <td>
-                            <input type="button" onclick="op('#cover','#cvr','./models/<?= $do ?>_update.php?id=<?= $value['id'] ?>')" value="更換圖片">
+                            <input type="button" onclick="op('#cover','#cvr','./models/<?= $do ?>_update.php?id=<?= $value['id'] ?>')" value="更新圖片">
+                        </td>
+                        <td>
+                            <input type="hidden" name="id[]" value="<?= $value['id'] ?>">
+                            <input type="hidden" name="table" value="<?= $do ?>">
                         </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
-        <table style="margin-top:40px; width:70%;">
+        <table style=" margin-top:40px; width:70%;">
             <tbody>
                 <tr>
-                    <td width="200px"><input type="button"
-                            onclick="op('#cover','#cvr','./models/<?= $do ?>.php')" value="新增網站標題圖片"></td>
+                    <td width="200px"><input type="button" onclick="op('#cover','#cvr','./models/<?= $do ?>.php')" value="新增網站標題圖片"></td>
                     <td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置">
                     </td>
                 </tr>
@@ -50,4 +50,5 @@
         </table>
 
     </form>
+</div>
 </div>
