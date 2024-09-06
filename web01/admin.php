@@ -28,8 +28,13 @@ if (empty($_SESSION['login'])) {
 	</div>
 
 	<div id="main">
-		<a title="" href="?">
-			<div class="ti" style="background:url('use/'); background-size:cover;"></div><!--標題-->
+		<?php
+		$row = $Title->find(['sh' => 1]);
+		?>
+		<a title="<?= $row['text'] ?>" href="./index.php">
+			<div class="ti" style="background:url('./images/<?= $row['img'] ?>'); background-size:cover;">
+
+			</div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">

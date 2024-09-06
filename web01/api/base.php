@@ -115,7 +115,21 @@ function dd($arg)
 }
 
 
+
 $Admin = new DB("admin");
 $Total = new DB("total");
 $Bottom = new DB("bottom");
 $Title = new DB('title');
+$Ad = new DB('ad');
+$Mvim = new DB('mvim');
+$Image = new DB('image');
+$News = new DB('news');
+$Menu = new DB("menu");
+
+if (!isset($_SESSION['views'])) {
+    $total = $Total->find(1)['views'];
+    $total++;
+    $Total->save(['id' => 1, 'views' => $total]);
+    // $Total->save($total);
+    $_SESSION['views'] = $total;
+}

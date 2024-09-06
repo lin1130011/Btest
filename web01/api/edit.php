@@ -14,7 +14,21 @@ foreach ($_POST['id'] as $key => $id) {
                 $data['text'] = $_POST['text'][$key];
                 $data['sh'] = (isset($_POST['sh']) && $_POST['sh'] == $id) ? 1 : 0;
                 break;
+            case 'ad':
+            case 'news':
+                $data['text'] = $_POST['text'][$key];
+                $data['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
+                break;
+            case 'mvim':
+            case 'image':
+                $data['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
+                break;
+            case 'admin':
+                $data['acc'] = $_POST['acc'][$key];
+                $data['pwd'] = $_POST['pwd'][$key];
+                break;
         }
+
         $db->save($data);
     }
 }

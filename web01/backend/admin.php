@@ -1,12 +1,11 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-    <p class="t cent botli">網站標題管理</p>
+    <p class="t cent botli">管理者帳號管理</p>
     <form method="post" action="./api/edit.php">
         <table width="100%">
             <tbody>
                 <tr class="yel">
-                    <td width="45%">網站標題</td>
-                    <td width="23%">替代文字</td>
-                    <td width="7%">顯示</td>
+                    <td width="45%">管理者帳號</td>
+                    <td width="45%">密碼</td>
                     <td width="7%">刪除</td>
                     <td></td>
                 </tr>
@@ -16,23 +15,18 @@
 
 
                 foreach ($data as $key => $value) : ?>
-                    <tr>
+                    <tr class="cent">
+
                         <td>
-                            <img style="width: 300px;height:30px" src="./images/<?= $value['img'] ?>" alt="<?= $value['text'] ?>">
+                            <input type="text" name="acc[]" id="" value="<?= $value['acc'] ?>">
                         </td>
                         <td>
-                            <input type="text" name="text[]" id="" value="<?= $value['text'] ?>">
-                        </td>
-                        <td>
-                            <input type="radio" name="sh" id="" value="<?= $value['id'] ?>" <?= ($value['sh'] == 1) ? "checked" : "" ?>>
+                            <input type="password" name="pwd[]" id="" value="<?= $value['pwd'] ?>">
                         </td>
                         <td>
                             <input type="checkbox" name="del[]" id="" value="<?= $value['id'] ?>">
                             <input type="hidden" name="id[]" id="" value="<?= $value['id'] ?>">
                             <input type="hidden" name="table" id="" value="<?= $do ?>">
-                        </td>
-                        <td>
-                            <input type="button" onclick="op('#cover','#cvr','./models/<?= $do ?>_update.php?id=<?= $value['id'] ?>')" value="更換圖片">
                         </td>
                     </tr>
                 <?php endforeach ?>
@@ -42,7 +36,7 @@
             <tbody>
                 <tr>
                     <td width="200px"><input type="button"
-                            onclick="op('#cover','#cvr','./models/<?= $do ?>.php')" value="新增網站標題圖片"></td>
+                            onclick="op('#cover','#cvr','./models/<?= $do ?>.php')" value="新增管理者帳號"></td>
                     <td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置">
                     </td>
                 </tr>
