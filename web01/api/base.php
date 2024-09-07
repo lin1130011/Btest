@@ -121,6 +121,9 @@ $Total = new DB("total");
 $Title = new DB("title");
 $Ad = new DB("ad");
 $News = new DB("news");
+$Mvim = new DB("mvim");
+$Image = new DB("image");
+$Menu = new DB("menu");
 
 if (!isset($_SESSION['views'])) {
     $total = $Total->find(1);

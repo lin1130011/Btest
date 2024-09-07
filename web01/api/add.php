@@ -10,6 +10,10 @@ if (!empty($_FILES['img']['tmp_name'])) {
     $_POST['img'] = $_FILES['img']['name'];
 }
 
+if ($do == "admin") {
+    unset($_POST['pwd2']);
+}
+
 $db->save($_POST);
 
 to("../admin.php?do=$do");

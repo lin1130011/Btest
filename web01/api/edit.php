@@ -23,6 +23,19 @@ foreach ($_POST['id'] as $key => $id) {
                 // $data['sh'] = (in_array($id, $_POST['sh'])) ? 1 : 0;
                 $data['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
                 break;
+            case 'mvim':
+            case 'image':
+                $data['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
+                break;
+            case 'admin':
+                $data['acc'] = $_POST['acc'][$key];
+                $data['pwd'] = $_POST['pwd'][$key];
+                break;
+            case 'menu':
+                $data['text'] = $_POST['text'][$key];
+                $data['href'] = $_POST['href'][$key];
+                $data['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
+                break;
         }
     }
     $db->save($data);

@@ -54,16 +54,29 @@ include_once "./api/base.php";
 					onclick="lo('?do=login')">管理登入</button>
 				<div style="width:89%; height:480px;" class="dbor">
 					<span class="t botli">校園映象區</span>
+					<div class="cent" onclick="pp(1)">
+						<img src="./icon/up.jpg" alt="">
+					</div>
+					<?php
+					$data = $Image->all(['sh' => 1]);
+					foreach ($data as $key => $value) : ?>
+						<div class="im cent" id="ssaa<?= $key ?>">
+							<img style="width:150px;height:103px;border:2px solid orange" src="./images/<?= $value['img'] ?>" alt="">
+						</div>
+					<?php endforeach ?>
+					<div class="cent" onclick="pp(2)">
+						<img src="./icon/dn.jpg" alt="">
+					</div>
 					<script>
 						var nowpage = 0,
-							num = 0;
+							num = <?= $Image->count(['sh' => 1]); ?>;
 
 						function pp(x) {
 							var s, t;
 							if (x == 1 && nowpage - 1 >= 0) {
 								nowpage--;
 							}
-							if (x == 2 && (nowpage + 1) * 3 <= num * 1 + 3) {
+							if (x == 2 && (nowpage + 1) <= num - 3) {
 								nowpage++;
 							}
 							$(".im").hide()
