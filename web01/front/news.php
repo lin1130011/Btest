@@ -34,6 +34,7 @@
 		</ol>
 	</div>
 
+
 	<div class="cent">
 		<?php
 		if ($now - 1 >= 1) {
